@@ -29,3 +29,8 @@ gen-blog generate --input inputFolder --output outputFolder --title "The Proton 
 - `--posts-per-page <int>`: Optional. Specifies the number of posts per single page. Default is 0.
 - `--separator, --s`: Optional. Disables the separator at the end of each blog post. Default is false.
 - `--multithread, --m`: Optional. Enables multithreaded output. Default is false.
+
+### General Notes:
+
+- Code was developed on an M1/ARM MacOS system.
+- Code was tested on both MacOS and Windows.
