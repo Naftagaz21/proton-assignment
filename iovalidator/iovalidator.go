@@ -29,7 +29,7 @@ func (*validator) ValidateAndProcessInput(inputPath string) ([]string, error) {
 	}
 
 	// Does not search through the entire directory tree
-	matches, err := filepath.Glob(inputPath + "/*.md")
+	matches, err := filepath.Glob(filepath.Join(inputPath, "*.md"))
 	if err != nil {
 		return nil, err
 	}
