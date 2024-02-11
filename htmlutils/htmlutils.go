@@ -60,10 +60,15 @@ func determineEndType(postLength int, idx int) EndSequenceType {
 type Htmlutils interface {
 	GetStartSequence() string
 	GenerateEndSequence(postLength int, pageIdx int) string
+	GetFilename(idx int) string
 }
 
 type htmlutils struct {
 	startSequence string
+}
+
+func (util *htmlutils) GetFilename(idx int) string {
+	return fmt.Sprintf("page-%d.html", idx)
 }
 
 func (util *htmlutils) GetStartSequence() string {
@@ -72,8 +77,8 @@ func (util *htmlutils) GetStartSequence() string {
 
 func (util *htmlutils) GenerateEndSequence(postLength int, pageIdx int) string {
 	endType := determineEndType(postLength, pageIdx)
-	prevPage := fmt.Sprintf("page-%d.html", pageIdx-1)
-	nextPage := fmt.Sprintf("page-%d.html", pageIdx+1)
+	prevPage := util.GetFilename(pageIdx - 1)
+	nextPage := util.GetFilename(pageIdx + 1)
 
 	var className, linkPrev, linkNext string
 

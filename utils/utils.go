@@ -49,7 +49,7 @@ func (*formatUtils) SortByPublicationDate(mdData [][]byte) {
 func (*formatUtils) SplitByArticleLimit(data [][]byte, limit int) [][]byte {
 	var pages [][]byte
 
-	// Hacky way
+	// A bit hacky
 	if limit == 0 {
 		limit = math.MaxInt
 	}

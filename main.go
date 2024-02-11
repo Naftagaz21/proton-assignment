@@ -28,7 +28,7 @@ type args struct {
 }
 
 func (args) Description() string {
-	return "converts markdown files to html files"
+	return "converts markdown files to an html blog, where each markdown file is a separate blog entry"
 }
 
 func printError(err error) {
@@ -92,8 +92,9 @@ func singleThreadedOutput(mdPages [][]byte, htmlUtil htmlutils.Htmlutils, args a
 			os.Exit(1)
 		}
 
-		filePath := filepath.Join(args.Command.Output, fmt.Sprintf("page-%d.html", idx))
+		filePath := filepath.Join(args.Command.Output, htmlUtil.GetFilename(idx))
 		buf.WriteString(htmlUtil.GenerateEndSequence(len(mdPages), idx))
+
 		err = os.WriteFile(filePath, buf.Bytes(), 0644)
 		if err != nil {
 			printError(err)
@@ -123,18 +124,17 @@ func multithreadedOutput(mdPages [][]byte, htmlUtil htmlutils.Htmlutils, args ar
 				return
 			}
 
-			filePath := filepath.Join(args.Command.Output, fmt.Sprintf("page-%d.html", idx))
+			filePath := filepath.Join(args.Command.Output, htmlUtil.GetFilename(idx))
 			mu.Lock()
 			defer mu.Unlock()
 
 			buf.WriteString(htmlUtil.GenerateEndSequence(len(mdPages), idx))
+
 			err = os.WriteFile(filePath, buf.Bytes(), 0644)
 			if err != nil {
 				errorCh <- err
 				return
 			}
-
-			buf.Reset()
 		}(idx, el)
 	}
 

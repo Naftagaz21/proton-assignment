@@ -8,6 +8,16 @@ This Go-based command-line interface (CLI) program converts markdown files into 
 generate <input> <output> <title> [additional-options]
 ```
 
+### Example usage
+
+```bash
+gen-blog generate --input inputFolder --output outputFolder --title "The Proton Blog"
+```
+
+```bash
+gen-blog generate --input inputFolder --output outputFolder --title "The Proton Blog" --posts-per-page 2 --s --m
+```
+
 ### Options
 
 - `--input`: A required argument representing the valid input folder path containing markdown files.
